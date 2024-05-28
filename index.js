@@ -18,11 +18,12 @@ const path = require('path');
   app.use(express.static(path.join(__dirname, 'html')));
 
   app.post('/update', (req, res) => {
-      console.log('updated', req.body);
+    console.log('updated', req.body);
+    return res.json({});
   });
 
   app.use('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'html/index.html'));
+    return res.sendFile(path.join(__dirname, 'html/index.html'));
   });
 
   app.listen(process.env.PORT || 8080, () => {

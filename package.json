@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/aliuspetraska/antaliepte/issues"
   },
-  "homepage": "https://github.com/aliuspetraska/antaliepte#readme"
+  "homepage": "https://github.com/aliuspetraska/antaliepte#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }

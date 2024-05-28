@@ -4,7 +4,7 @@
   "description": "antaliepte",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "keywords": [
     "antaliepte"
   ],
-  "author": "",
+  "author": "IBM",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aliuspetraska/antaliepte/issues"

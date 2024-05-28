@@ -2,6 +2,7 @@ const highAccuracy = false;
 const timeout = 10_000;
 
 window.addEventListener('DOMContentLoaded', () => {
+    const channel = new BroadcastChannel('sw-messages');
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js').then((registration) => {
             if (registration.installing) {
@@ -12,14 +13,20 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log("Service worker active with scope:", registration.scope);
             }
 
-            navigator.serviceWorker.addEventListener('message', event => {
-                outputToBody(`Received message: ${JSON.stringify(event)}`)
-                navigator.serviceWorker.ready.then(reg => {
-                    navigator.geolocation.getCurrentPosition(position => {
-                        reg.active.postMessage(position)
-                    })
-                })
+            channel.addEventListener('message', event => {
+                console.log(event)
+                navigator.geolocation.getCurrentPosition(position => {
+                    console.log('sending message back')
+                    channel.postMessage(position)
+                }, (error) => {
+                    console.error('Error getting location for message back:', error);
+                }, {
+                    enableHighAccuracy: highAccuracy,
+                    timeout,
+                    maximumAge: 0
+                });
             })
+
         }).catch((error) => {
             console.log('Service Worker registration failed:', error);
         });

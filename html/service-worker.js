@@ -21,10 +21,18 @@ self.addEventListener('fetch', (event) => {
     );
 });
 
+const channel = new BroadcastChannel('sw-messages');
+
+channel.addEventListener('message', event => {
+    console.log(event)
+})
+
 self.addEventListener('sync', (event) => {
     console.log(JSON.stringify(event))
     if (event.tag === 'location-sync') {
         event.waitUntil(trackLocation());
+    } else if (event.tag === 'comms') {
+        channel.postMessage('hello')
     }
 });
 

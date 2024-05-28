@@ -21,6 +21,7 @@ app.use('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'html/index.html'));
 });
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log('Works!');
+const PORT = process.env.PORT || 8080
+app.listen(PORT, () => {
+  console.log(`Servering on ${PORT}`);
 });

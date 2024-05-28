@@ -4,7 +4,8 @@
   "description": "antaliepte",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,7 @@
   "keywords": [
     "antaliepte"
   ],
-  "author": "IBM",
+  "author": "unknown",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aliuspetraska/antaliepte/issues"
@@ -24,5 +25,8 @@
     "compression": "^1.7.4",
     "express": "^4.19.2",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.1"
   }
 }

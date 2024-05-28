@@ -28,6 +28,10 @@ self.addEventListener('sync', (event) => {
     }
 });
 
+self.addEventListener('message', event => {
+    console.log(event)
+})
+
 async function trackLocation() {
     try {
         const position = await new Promise((resolve, reject) => {

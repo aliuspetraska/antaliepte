@@ -11,6 +11,15 @@ window.addEventListener('DOMContentLoaded', () => {
             } else if (registration.active) {
                 console.log("Service worker active with scope:", registration.scope);
             }
+
+            navigator.serviceWorker.addEventListener('message', event => {
+                outputToBody(`Received message: ${JSON.stringify(event)}`)
+                navigator.serviceWorker.ready.then(reg => {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        reg.active.postMessage(position)
+                    })
+                })
+            })
         }).catch((error) => {
             console.log('Service Worker registration failed:', error);
         });

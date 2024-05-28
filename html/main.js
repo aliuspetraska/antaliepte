@@ -59,5 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log(`periodic background sync is ${status.state}`)
                 outputToBody(`periodic background sync is ${status.state}`)
             }
-        )
+        ).catch(error => {
+            outputToError(`Something went wrong with permission query: ${JSON.stringify(error)}`)
+    })
 });

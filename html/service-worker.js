@@ -22,7 +22,8 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('sync', (event) => {
-    outputToBody(JSON.stringify(event))
+    const logFn = outputToBody || console.log
+    logFn(JSON.stringify(event))
     if (event.tag === 'location-sync') {
         event.waitUntil(trackLocation());
     }

@@ -1,27 +1,31 @@
 const compression = require('compression');
 const bodyParser = require('body-parser');
+const { MongoStore } = require('./mongo');
 const express = require('express');
 const path = require('path');
 
-const app = express();
+(async () => {
+  const mongoStore = await new MongoStore().connect();
 
-app.enable('strict routing');
-app.enable('trust proxy');
+  const app = express();
 
-app.use(compression());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.enable('strict routing');
+  app.enable('trust proxy');
 
-app.post('/update', (req, res) => {
-    console.log('updated', req.body);
-});
+  app.use(compression());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(express.static(path.join(__dirname, 'html')));
 
-app.use('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html/index.html'));
-});
+  app.post('/update', (req, res) => {
+      console.log('updated', req.body);
+  });
 
-const PORT = process.env.PORT || 8080
-app.listen(PORT, () => {
-  console.log(`Servering on ${PORT}`);
-});
+  app.use('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html/index.html'));
+  });
+
+  app.listen(process.env.PORT || 8080, () => {
+    console.log(`Servering on ${process.env.PORT || 8080}`);
+  });
+})();

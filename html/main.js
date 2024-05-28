@@ -22,9 +22,17 @@ window.addEventListener('DOMContentLoaded', () => {
             navigator.geolocation.getCurrentPosition((position) => {
                 console.log('Current position:', position);
 
-                let newElement = document.createElement("div");
-                newElement.innerHTML += `${JSON.stringify(position)}<br/>`;
-                document.getElementById("body").append(newElement);
+                const {altitude, longitude, accuracy, heading, latitude, altitudeAccuracy, speed} = position.coords
+
+                outputToBody(JSON.stringify({
+                    altitude,
+                    longitude,
+                    latitude,
+                    accuracy,
+                    heading,
+                    altitudeAccuracy,
+                    speed
+                }))
 
             }, (error) => {
                 console.error('Error getting location:', error);
@@ -44,8 +52,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // Check if permissions are here
     navigator.permissions.query({name: "periodic-background-sync"})
         .then((status) => {
-            console.log(`periodic background sync is ${status.state}`)
-            outputToBody(`periodic background sync is ${status.state}`)
-        }
-    )
+                console.log(`periodic background sync is ${status.state}`)
+                outputToBody(`periodic background sync is ${status.state}`)
+            }
+        )
 });

@@ -11,10 +11,12 @@ app.enable('trust proxy');
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, 'html')));
 
 app.post('/update', (req, res) => {
     console.log('updated', req.body);
+
+    res.send();
 });
 
 app.use('/', (req, res) => {

@@ -1,0 +1,22 @@
+{
+  "name": "antaliepte",
+  "version": "1.0.0",
+  "description": "antaliepte",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliuspetraska/antaliepte.git"
+  },
+  "keywords": [
+    "antaliepte"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aliuspetraska/antaliepte/issues"
+  },
+  "homepage": "https://github.com/aliuspetraska/antaliepte#readme"
+}

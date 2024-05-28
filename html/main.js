@@ -18,10 +18,17 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startTracking').addEventListener('click', () => {
         if (navigator.geolocation) {
             console.log(`High Accuracy: ${highAccuracy}`)
+            outputToBody(`HighAccuracy: ${highAccuracy}`)
             navigator.geolocation.getCurrentPosition((position) => {
                 console.log('Current position:', position);
+
+                let newElement = document.createElement("div");
+                newElement.innerHTML += `${JSON.stringify(position)}<br/>`;
+                document.getElementById("body").append(newElement);
+
             }, (error) => {
                 console.error('Error getting location:', error);
+                outputToError(error.message)
             }, {
                 enableHighAccuracy: highAccuracy,
                 timeout: 10000,
@@ -29,10 +36,16 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             console.log('Geolocation is not supported by this browser.');
+            outputToError('Geolocation is not supported by this browser.')
         }
     });
 
 
     // Check if permissions are here
-    navigator.permissions.query({ name: "periodic-background-sync" }).then((status)=>{ console.log(`periodic background sync is ${status.state}`)})
+    navigator.permissions.query({name: "periodic-background-sync"})
+        .then((status) => {
+            console.log(`periodic background sync is ${status.state}`)
+            outputToBody(`periodic background sync is ${status.state}`)
+        }
+    )
 });

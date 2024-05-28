@@ -21,13 +21,8 @@ self.addEventListener('fetch', (event) => {
     );
 });
 
-self.addEventListener('periodicsync', event => {
-    console.log('periodicsync cia yra')
-    console.log(event)
-})
-
 self.addEventListener('sync', (event) => {
-    console.log("WAT", event)
+    outputToBody(JSON.stringify(event))
     if (event.tag === 'location-sync') {
         event.waitUntil(trackLocation());
     }
@@ -36,8 +31,6 @@ self.addEventListener('sync', (event) => {
 async function trackLocation() {
     try {
         const position = await new Promise((resolve, reject) => {
-            console.log(navigator)
-            console.log(navigator.geolocation)
             navigator.geolocation.getCurrentPosition(resolve, reject, {
                 enableHighAccuracy: true,
                 timeout: 5000,

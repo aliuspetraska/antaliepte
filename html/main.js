@@ -17,7 +17,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log(event)
                 navigator.geolocation.getCurrentPosition(position => {
                     console.log('sending message back')
-                    channel.postMessage(position)
+                    const {altitude, longitude, accuracy, heading, latitude, altitudeAccuracy, speed} = position.coords
+
+                    channel.postMessage({
+                        altitude,
+                        longitude,
+                        latitude,
+                        accuracy,
+                        heading,
+                        altitudeAccuracy,
+                        speed
+                    })
                 }, (error) => {
                     console.error('Error getting location for message back:', error);
                 }, {

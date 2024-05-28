@@ -1,4 +1,5 @@
 const highAccuracy = false;
+const timeout = 10_000;
 
 window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) {
@@ -18,7 +19,10 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startTracking').addEventListener('click', () => {
         if (navigator.geolocation) {
             console.log(`High Accuracy: ${highAccuracy}`)
-            outputToBody(`HighAccuracy: ${highAccuracy}`)
+            outputToBody(JSON.stringify({
+                HighAccuracy: highAccuracy,
+                TimeoutInS: timeout / 1_000,
+            }))
             navigator.geolocation.getCurrentPosition((position) => {
                 console.log('Current position:', position);
 
@@ -39,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 outputToError(error.message)
             }, {
                 enableHighAccuracy: highAccuracy,
-                timeout: 10000,
+                timeout,
                 maximumAge: 0
             });
         } else {

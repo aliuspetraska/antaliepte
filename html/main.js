@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             channel.addEventListener('message', event => {
                 console.log(event)
+                outputToBody('Received message from SW')
                 navigator.geolocation.getCurrentPosition(position => {
                     console.log('sending message back')
                     const {altitude, longitude, accuracy, heading, latitude, altitudeAccuracy, speed} = position.coords
